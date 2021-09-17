@@ -16,6 +16,7 @@ namespace Bicep.Core.Semantics
         Function,
         Local,
         Scope,
-        Property
+        Property,
+        Import,
     }
 }

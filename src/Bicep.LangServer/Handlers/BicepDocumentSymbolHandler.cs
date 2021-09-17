@@ -64,6 +64,9 @@ namespace Bicep.LanguageServer.Handlers
         {
             switch (symbol)
             {
+                case ImportSymbol _:
+                    return SymbolKind.Package;
+
                 case ParameterSymbol _:
                     return SymbolKind.Field;
 

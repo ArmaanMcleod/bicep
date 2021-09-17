@@ -371,6 +371,18 @@ namespace Bicep.Core.TypeSystem
 
             });
 
+        public override void VisitImportDeclarationSyntax(ImportDeclarationSyntax syntax)
+            => AssignTypeWithDiagnostics(syntax, diagnostics =>
+            {
+                var declaredType = syntax.GetDeclaredType();
+
+                this.ValidateDecorators(syntax.Decorators, declaredType, diagnostics);
+                // TODO: Look up import from known providers here
+                // TODO: validate config type against import
+
+                return declaredType;
+            });
+
         private void ValidateDecorators(IEnumerable<DecoratorSyntax> decoratorSyntaxes, TypeSymbol targetType, IDiagnosticWriter diagnostics)
         {
             var decoratorSyntaxesByMatchingDecorator = new Dictionary<Decorator, List<DecoratorSyntax>>();
